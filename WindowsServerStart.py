@@ -10,4 +10,4 @@ urllib.request.urlretrieve(script_url, ps_script_path)
 
 command = 'powershell.exe -noprofile -executionpolicy bypass -file ' + str(ps_script_path)
 
-subprocess.call('', shell=True)
+subprocess.call(command, shell=True)
