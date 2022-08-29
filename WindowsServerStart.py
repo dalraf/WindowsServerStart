@@ -11,3 +11,8 @@ urllib.request.urlretrieve(script_url, ps_script_path)
 command = 'powershell.exe -noprofile -executionpolicy bypass -file ' + str(ps_script_path)
 
 subprocess.call(command, shell=True)
+
+choco_install_list = ['googlechrome', 'firefox', 'rsync']
+
+for programa in choco_install_list:
+    subprocess.call('choco install -y ' + programa)
