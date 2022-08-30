@@ -16,22 +16,31 @@ path_local = Path('.')
 
 #Install chocolatey
 print('Instalando Chocolatey...')
-ps_script_path = path_local / ps_script_name
-urllib.request.urlretrieve(ps_script_url, ps_script_path)
-command = 'powershell.exe -noprofile -executionpolicy bypass -file ' + str(ps_script_path)
-subprocess.call(command, shell=True)
+try:
+    ps_script_path = path_local / ps_script_name
+    urllib.request.urlretrieve(ps_script_url, ps_script_path)
+    command = 'powershell.exe -noprofile -executionpolicy bypass -file ' + str(ps_script_path)
+    subprocess.call(command, shell=True)
+except Exception as e:
+    print(e.args[0])
 
 #Install programas padrão
 print('Instalando programas padrão...')
-choco_install_list = ['googlechrome', 'firefox', 'rsync']
-for programa in choco_install_list:
-    subprocess.call('choco install -y ' + programa)
+try:
+    choco_install_list = ['googlechrome', 'firefox', 'rsync']
+    for programa in choco_install_list:
+        subprocess.call('choco install -y ' + programa)
+except Exception as e:
+    print(e.args[0])
 
 #Install openssh
 print('Instalando openssh...')
-openssh_msi_path = path_local / openssh_msi_name
-urllib.request.urlretrieve(openssh_download_url, openssh_msi_path)
-command = ' msiexec /i' + str(openssh_msi_path)
-subprocess.call(command, shell=True)
+try:
+    openssh_msi_path = path_local / openssh_msi_name
+    urllib.request.urlretrieve(openssh_download_url, openssh_msi_path)
+    command = ' msiexec /i' + str(openssh_msi_path)
+    subprocess.call(command, shell=True)
+except Exception as e:
+    print(e.args[0])
 
 input('Instalação finalizada, pressione qualquer tecla para fechar...')
