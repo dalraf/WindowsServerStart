@@ -1,46 +1,26 @@
-import subprocess
-import urllib.request
-from pathlib import Path
+from instalacao import (
+    install_chocolatey,
+    install_google_chrome,
+    install_firefox,
+    install_openssh,
+)
 
+menu = [
+    ["Chocolatey", install_chocolatey],
+    ["Google Chrome", install_google_chrome],
+    ["Firefox", install_firefox],
+    ["Openssh", install_openssh],
+]
 
-#Parametros Openssh
-openssh_download_url = 'https://github.com/PowerShell/Win32-OpenSSH/releases/download/v8.9.1.0p1-Beta/OpenSSH-Win32-v8.9.1.0.msi'
-openssh_msi_name = 'OpenSSH-Win32-v8.9.1.0.msi'
+while (True):
+    for indice, value in enumerate(menu):
+        print(indice, '- Instalar ', value[0],)
+    print('99 - Instalar tudo')
 
-#Parametros Chocolatey
-ps_script_url = 'https://community.chocolatey.org/install.ps1'
-ps_script_name = 'install_chocolatey.ps1'
+    status = input("Digite a opção desejada:")
 
-
-path_local = Path('.')
-
-#Install chocolatey
-print('Instalando Chocolatey...')
-try:
-    ps_script_path = path_local / ps_script_name
-    urllib.request.urlretrieve(ps_script_url, ps_script_path)
-    command = 'powershell.exe -noprofile -executionpolicy bypass -file ' + str(ps_script_path)
-    subprocess.call(command, shell=True)
-except Exception as e:
-    print(e.args[0])
-
-#Install programas padrão
-print('Instalando programas padrão...')
-try:
-    choco_install_list = ['googlechrome', 'firefox', 'rsync']
-    for programa in choco_install_list:
-        subprocess.call('choco install -y ' + programa)
-except Exception as e:
-    print(e.args[0])
-
-#Install openssh
-print('Instalando openssh...')
-try:
-    openssh_msi_path = path_local / openssh_msi_name
-    urllib.request.urlretrieve(openssh_download_url, openssh_msi_path)
-    command = ' msiexec /i' + str(openssh_msi_path)
-    subprocess.call(command, shell=True)
-except Exception as e:
-    print(e.args[0])
-
-input('Instalação finalizada, pressione qualquer tecla para fechar...')
+    if status == '99':
+        for i in menu:
+            i[1]()
+    else:
+        menu[int(status)][1]()
