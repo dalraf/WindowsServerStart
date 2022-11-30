@@ -6,33 +6,28 @@ from vars import (
     openssh_msi_name,
     openssh_download_url,
     path_local,
+    choco_path,
 )
 from functions import (
     download_install_google,
     download_install_google_zip,
     execute,
+    execute_powershell,
 )
 
 
 def install_chocolatey():
     print("Instalando Chocolatey...")
     try:
-        ps_script_path = path_local / ps_script_name
-        urllib.request.urlretrieve(ps_script_url, ps_script_path)
-        command = "powershell.exe -noprofile -executionpolicy bypass -file " + str(
-            ps_script_path
-        )
-        execute(command)
+        command = "Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))"
+        execute_powershell(command)
     except Exception as e:
         print(e.args[0])
 
 
 def install_chocolatey_program(programa, cmd):
-    if not shutil.which("choco"):
-        install_chocolatey()
-    print(f"Instalando {programa}")
     try:
-        execute("choco install -y " + cmd)
+        execute(f"{choco_path} install -y " + cmd)
     except Exception as e:
         print(e.args[0])
 

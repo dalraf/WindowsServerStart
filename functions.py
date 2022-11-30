@@ -12,6 +12,14 @@ def execute(cmd):
         subprocess.call(cmd, cwd=path_local, shell=True)
 
 
+def execute_powershell(cmd):
+    if platform.system() == 'Linux':
+        print(cmd)
+    else:
+        print(cmd)
+        subprocess.run(["powershell", "-Command", cmd], cwd=path_local)
+
+
 def download_file_from_google_drive(id, destination):
     gdown.download(id=id, output=str(destination), quiet=False)
 
