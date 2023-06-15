@@ -25,8 +25,8 @@ sisbr20_file_name = "Sisbr2.0.exe"
 citrix_google_id = "19o1eGqGL6xR1B9b3VYunea4zzYe3Heb9"
 citrix_file_name = "Citrix10.zip"
 
-openssh_download_url = 'https://github.com/PowerShell/Win32-OpenSSH/releases/download/v8.9.1.0p1-Beta/OpenSSH-Win32-v8.9.1.0.msi'
-openssh_msi_name = 'OpenSSH-Win32-v8.9.1.0.msi'
+openssh_download_url = 'https://github.com/PowerShell/Win32-OpenSSH/releases/download/v9.2.2.0p1-Beta/OpenSSH-Win64-v9.2.2.0.msi'
+openssh_msi_name = 'OpenSSH-Win64-v9.2.2.0.msi'
 
 path_local = Path("./downloads").absolute()
 path_local.mkdir(parents=True, exist_ok=True)
