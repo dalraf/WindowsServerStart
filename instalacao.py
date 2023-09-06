@@ -48,4 +48,5 @@ def install_openssh():
     urllib.request.urlretrieve(openssh_download_url, openssh_msi_path)
     command = ' msiexec /i ' + str(openssh_msi_path)
     execute(command)
-
+    command = 'netsh advfirewall firewall add rule name="ssh" dir=in action=allow protocol=TCP localport=22'
+    execute(command)
