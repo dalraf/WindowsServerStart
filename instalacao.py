@@ -46,6 +46,6 @@ def install_rsync():
 def install_openssh():
     openssh_msi_path = path_local / openssh_msi_name
     urllib.request.urlretrieve(openssh_download_url, openssh_msi_path)
-    command = ' msiexec /i' + str(openssh_msi_path)
+    command = ' msiexec /i ' + str(openssh_msi_path)
     execute(command)
 
